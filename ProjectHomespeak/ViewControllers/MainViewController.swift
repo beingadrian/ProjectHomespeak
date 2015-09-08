@@ -78,8 +78,7 @@ extension MainViewController: UITableViewDelegate {
         default:
             break
         }
-        
-        
+    
     }
     
 }

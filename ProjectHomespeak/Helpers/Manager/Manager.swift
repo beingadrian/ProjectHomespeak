@@ -71,13 +71,13 @@ class Manager {
                         
                         if (success) {
                             println("HealthKit authorization successful.")
-
                         } else {
                             println("HealthKit authorization not successful.")
                             self.activeIntegrationDict[index] = false
                             button.selected = false
                         }
                     }
+                    
                 case 1:
                     // Auto-music
                     println("\(index) is active")

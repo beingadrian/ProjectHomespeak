@@ -20,6 +20,7 @@
 		33DD60EB1B9D531D002F9701 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33DD60B31B9B85EC002F9701 /* LaunchScreen.xib */; };
 		33DD60F11B9D5722002F9701 /* FitnessReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */; };
 		33DD60F81B9D9C00002F9701 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60F71B9D9C00002F9701 /* Extensions.swift */; };
+		33DD60FD1B9ECC1C002F9701 /* SpeechHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60FC1B9ECC1C002F9701 /* SpeechHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		33DD60EF1B9D5500002F9701 /* Project-Homespeak-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project-Homespeak-Bridging-Header.h"; sourceTree = "<group>"; };
 		33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessReportViewController.swift; sourceTree = "<group>"; };
 		33DD60F71B9D9C00002F9701 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		33DD60FC1B9ECC1C002F9701 /* SpeechHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		33DD60CD1B9B8681002F9701 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				33DD60FB1B9ECC02002F9701 /* Speech */,
 				33DD60D91B9C2982002F9701 /* Manager */,
 				33DD60D11B9B86F2002F9701 /* HealthKit */,
 			);
@@ -186,6 +189,14 @@
 				33DD60F71B9D9C00002F9701 /* Extensions.swift */,
 			);
 			path = Extras;
+			sourceTree = "<group>";
+		};
+		33DD60FB1B9ECC02002F9701 /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				33DD60FC1B9ECC1C002F9701 /* SpeechHelper.swift */,
+			);
+			path = Speech;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +307,7 @@
 			files = (
 				33DD60D81B9C1DA7002F9701 /* IntegrationCell.swift in Sources */,
 				33DD60AB1B9B85EC002F9701 /* AppDelegate.swift in Sources */,
+				33DD60FD1B9ECC1C002F9701 /* SpeechHelper.swift in Sources */,
 				33DD60F11B9D5722002F9701 /* FitnessReportViewController.swift in Sources */,
 				33DD60F81B9D9C00002F9701 /* Extensions.swift in Sources */,
 				33DD60E91B9D5295002F9701 /* UIImage+ImageEffects.m in Sources */,

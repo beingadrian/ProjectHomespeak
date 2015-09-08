@@ -22,6 +22,8 @@ class HealthHelper {
         }
     }()
     
+    // authorized
+    static var healthKitIsAuthorized = false
     
     // MARK: - Types to read
     
@@ -33,15 +35,25 @@ class HealthHelper {
         HKQuantityTypeIdentifierDistanceWalkingRunning
     )
     
+    static let activeEnergyType = HKQuantityType.quantityTypeForIdentifier(
+        HKQuantityTypeIdentifierActiveEnergyBurned
+    )
+    
     
     // MARK: - Request permission method
     
     static func requestHealthKitAuthorization(completionBlock: (success: Bool, error: NSError?) -> Void) {
         
-        let dataTypesToRead = NSSet(objects: stepsType, walkingRunningDistanceType)
+        let dataTypesToRead = NSSet(objects: stepsType, walkingRunningDistanceType, activeEnergyType)
         
         healthStore?.requestAuthorizationToShareTypes(nil, readTypes: dataTypesToRead as Set<NSObject>) {
             (success, error) in
+            
+            if (success) {
+                self.healthKitIsAuthorized = true
+            } else {
+                self.healthKitIsAuthorized = false
+            }
             
             completionBlock(success: success, error: error)
         }
@@ -53,7 +65,8 @@ class HealthHelper {
     
     // get total step count
     static func getTotalStepsSinceDate(date: NSDate, completionBlock: (totalStepCount: Int?, error: NSError?) -> Void) {
-        
+
+        // predicate from start of day
         let predicate = HKQuery.predicateForSamplesWithStartDate(date, endDate: NSDate(), options: .None)
         
         let sumOption = HKStatisticsOptions.CumulativeSum
@@ -72,6 +85,7 @@ class HealthHelper {
             } else {
                 // there is no sum quantity due to no sample (too short of a time period)
                 println("There is no sum quantity")
+                completionBlock(totalStepCount: nil, error: error)
             }
             
         }
@@ -80,7 +94,7 @@ class HealthHelper {
         
     }
     
-    // TODO: get total walking and running distance
+    // get total walking and running distance
     static func getTotalDistanceSinceDate(date: NSDate, completionBlock: (totalDistance: Int?, error: NSError?) -> Void) {
 
         // predicate from start of day
@@ -102,11 +116,43 @@ class HealthHelper {
             } else {
                 // there is no sum quantity due to no sample (too short of a time period)
                 println("There is no sum quantity")
+                completionBlock(totalDistance: nil, error: error)
             }
             
         }
         
         healthStore?.executeQuery(totalDistanceQuery)
+        
+    }
+    
+    // get total active energy burned
+    static func getTotalActiveCaloriesBurnedSinceDate(date: NSDate, completionBlock: (totalActiveCalories: Int?, error: NSError?) -> Void) {
+        
+        // predicate from start of day
+        let predicate = HKQuery.predicateForSamplesWithStartDate(date, endDate: NSDate(), options: .None)
+        
+        let sumOption = HKStatisticsOptions.CumulativeSum
+        
+        let totalActiveCaloriesBurnedQuery = HKStatisticsQuery(quantityType: activeEnergyType, quantitySamplePredicate: predicate, options: sumOption) {
+            (query, result, error) in
+            
+            if (error != nil) {
+                // something happened
+                println(error.description)
+            }
+            
+            if let sumQuantity = result?.sumQuantity() {
+                let totalActiveCaloriesBurned = Int(sumQuantity.doubleValueForUnit(HKUnit.kilocalorieUnit()))
+                completionBlock(totalActiveCalories: totalActiveCaloriesBurned, error: error)
+            } else {
+                // there is no sum quantity due to no sample (too short of a time period)
+                println("There is no sum quantity")
+                completionBlock(totalActiveCalories: nil, error: error)
+            }
+            
+        }
+        
+        healthStore?.executeQuery(totalActiveCaloriesBurnedQuery)
         
     }
 }
