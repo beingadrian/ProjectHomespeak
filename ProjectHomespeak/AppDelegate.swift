@@ -18,9 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         
-        // set status bar to white
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
-        
         // set navigation bar to invisible
         UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = UIImage()

@@ -25,6 +25,12 @@ class HealthHelper {
     // authorized
     static var healthKitIsAuthorized = false
     
+    // stored data
+    static var lastTotalSteps: Int = 0
+    static var lastTotalDistance: Double = 0
+    static var lastTotalActiveCalories: Double = 0
+    
+    
     // MARK: - Types to read
     
     static let stepsType = HKQuantityType.quantityTypeForIdentifier(
@@ -62,6 +68,59 @@ class HealthHelper {
     
     
     // MARK: - Health quries
+    
+    // get all data set
+    static func getHealthDataSet() {
+        
+        // get healthKit data
+        let begginingOfDay = NSDate().beginningOfDay()
+        
+        HealthHelper.getTotalStepsSinceDate(begginingOfDay) {
+            (totalSteps, error) in
+            
+            if (error != nil) {
+                println(error?.description)
+            }
+            
+            if let totalSteps = totalSteps {
+                self.lastTotalSteps = totalSteps
+            }
+            
+        }
+        
+        HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
+            (totalDistance, error) in
+            
+            if (error != nil) {
+                println(error?.description)
+            }
+            
+            if let totalDistance = totalDistance {
+                // total distance in meters
+                let distanceInMeters = Double(totalDistance) / 1000
+                let roundedDistance = round(distanceInMeters * 10) / 10
+                self.lastTotalDistance = roundedDistance
+            }
+            
+        }
+        
+        HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
+            (totalActiveCaloriesBurned, error) in
+            
+            if (error != nil) {
+                println(error?.description)
+            }
+            
+            if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
+                let kilocalories = Double(totalActiveCaloriesBurned) / 1000
+                let roundedKiloCalories = round(kilocalories * 10) / 10
+                self.lastTotalActiveCalories = roundedKiloCalories
+            }
+            
+        }
+        
+    }
+    
     
     // get total step count
     static func getTotalStepsSinceDate(date: NSDate, completionBlock: (totalStepCount: Int?, error: NSError?) -> Void) {
@@ -142,7 +201,7 @@ class HealthHelper {
             }
             
             if let sumQuantity = result?.sumQuantity() {
-                let totalActiveCaloriesBurned = Int(sumQuantity.doubleValueForUnit(HKUnit.kilocalorieUnit()))
+                let totalActiveCaloriesBurned = Int(sumQuantity.doubleValueForUnit(HKUnit.calorieUnit()))
                 completionBlock(totalActiveCalories: totalActiveCaloriesBurned, error: error)
             } else {
                 // there is no sum quantity due to no sample (too short of a time period)

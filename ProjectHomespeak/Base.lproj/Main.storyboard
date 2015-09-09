@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iYk-9y-S0O">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -18,21 +17,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85w-Iw-31W" userLabel="Group view">
-                                <rect key="frame" x="170" y="60" width="260" height="480"/>
+                                <rect key="frame" x="170" y="40" width="260" height="520"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select integrations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ytb-rn-7SR">
-                                        <rect key="frame" x="54" y="0.0" width="152.5" height="25"/>
+                                        <rect key="frame" x="54" y="10" width="152.5" height="25"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="110" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="btg-69-Dfd">
-                                        <rect key="frame" x="0.0" y="55" width="260" height="425"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="110" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="btg-69-Dfd">
+                                        <rect key="frame" x="0.0" y="45" width="260" height="445"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="440" id="PC4-Xe-V15"/>
                                         </constraints>
-                                        <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntegrationCell" rowHeight="110" id="G0s-px-dlZ" customClass="IntegrationCell" customModule="ProjectHomespeak" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -101,22 +100,36 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="n70-jD-vfL"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sa-Ns-xww">
+                                        <rect key="frame" x="64.5" y="490" width="131" height="30"/>
+                                        <state key="normal" title="Give today's report">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showReportView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vDL-vP-Sfj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="btg-69-Dfd" firstAttribute="leading" secondItem="85w-Iw-31W" secondAttribute="leading" id="00R-fN-4pw"/>
-                                    <constraint firstAttribute="height" constant="480" id="5Fa-b3-O8U"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Sa-Ns-xww" secondAttribute="bottom" id="2ZN-nL-Erz"/>
+                                    <constraint firstAttribute="height" constant="520" id="5Fa-b3-O8U"/>
                                     <constraint firstAttribute="centerX" secondItem="Ytb-rn-7SR" secondAttribute="centerX" id="80l-Jm-jhm"/>
-                                    <constraint firstItem="Ytb-rn-7SR" firstAttribute="top" secondItem="85w-Iw-31W" secondAttribute="top" id="FVG-Ht-0tN"/>
+                                    <constraint firstItem="Ytb-rn-7SR" firstAttribute="top" secondItem="85w-Iw-31W" secondAttribute="top" constant="10" id="FVG-Ht-0tN"/>
                                     <constraint firstItem="btg-69-Dfd" firstAttribute="top" secondItem="85w-Iw-31W" secondAttribute="top" constant="40" id="IOB-qc-ICK"/>
                                     <constraint firstAttribute="width" constant="260" id="Iyx-wN-1Wj"/>
-                                    <constraint firstAttribute="bottom" secondItem="btg-69-Dfd" secondAttribute="bottom" id="OQW-Nn-TWH"/>
-                                    <constraint firstItem="btg-69-Dfd" firstAttribute="top" secondItem="Ytb-rn-7SR" secondAttribute="bottom" constant="30" id="qLO-XT-xlh"/>
+                                    <constraint firstItem="Ytb-rn-7SR" firstAttribute="top" secondItem="6Sa-Ns-xww" secondAttribute="bottom" constant="10" id="MLh-N6-hUa"/>
+                                    <constraint firstAttribute="bottom" secondItem="btg-69-Dfd" secondAttribute="bottom" constant="30" id="OQW-Nn-TWH"/>
+                                    <constraint firstAttribute="centerX" secondItem="6Sa-Ns-xww" secondAttribute="centerX" id="o9I-U8-eZy"/>
+                                    <constraint firstItem="btg-69-Dfd" firstAttribute="top" secondItem="Ytb-rn-7SR" secondAttribute="bottom" constant="10" id="qLO-XT-xlh"/>
                                     <constraint firstAttribute="trailing" secondItem="btg-69-Dfd" secondAttribute="trailing" id="tSt-zL-KH7"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="IOB-qc-ICK"/>
+                                        <exclude reference="MLh-N6-hUa"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -132,11 +145,48 @@
                     <connections>
                         <segue destination="wjt-DN-cNR" kind="show" identifier="FitnessReport" id="fe1-It-VdQ"/>
                         <segue destination="nUS-uF-XG8" kind="show" identifier="AutoMusic" id="5f3-zw-wqC"/>
+                        <segue destination="WKh-60-ayl" kind="presentation" identifier="ReportView" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="muf-KA-eIo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1137" y="395"/>
+        </scene>
+        <!--Report View Controller-->
+        <scene sceneID="LFD-g0-3bU">
+            <objects>
+                <viewController id="WKh-60-ayl" userLabel="Report View Controller" customClass="ReportViewController" customModule="ProjectHomespeak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WwY-xm-ad4"/>
+                        <viewControllerLayoutGuide type="bottom" id="kRR-WW-lXQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c2v-se-iZD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9r-c6-fTf">
+                                <rect key="frame" x="255" y="545" width="89" height="30"/>
+                                <state key="normal" title="Return home">
+                                    <color key="titleColor" red="0.20392156859999999" green="0.7725490196" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="returnButtonPressed:" destination="WKh-60-ayl" eventType="touchUpInside" id="WWr-Mw-sv2"/>
+                                    <segue destination="mBh-Uh-Hjj" kind="unwind" unwindAction="unwindToSegue:" id="ihZ-8y-19L"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="kRR-WW-lXQ" firstAttribute="top" secondItem="O9r-c6-fTf" secondAttribute="bottom" constant="25" id="6WO-ne-idb"/>
+                            <constraint firstAttribute="centerX" secondItem="O9r-c6-fTf" secondAttribute="centerX" id="GH8-Ig-FcB"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OrP-jU-9DY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mBh-Uh-Hjj" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1137" y="1123"/>
         </scene>
         <!--Fitness Report View Controller-->
         <scene sceneID="iPP-Zc-0hA">
@@ -247,49 +297,17 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8e-d4-gFk" userLabel="Blur">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="LIT-CB-4xQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pte-EC-Ulh">
-                                            <rect key="frame" x="263.5" y="287" width="74" height="25"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerX" secondItem="Pte-EC-Ulh" secondAttribute="centerX" id="QbT-AU-HeH"/>
-                                        <constraint firstAttribute="centerY" secondItem="Pte-EC-Ulh" secondAttribute="centerY" id="QoE-mm-aen"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="u8e-d4-gFk" firstAttribute="top" secondItem="4uG-6P-cqe" secondAttribute="topMargin" id="Bv5-8C-sRD"/>
-                            <constraint firstItem="u8e-d4-gFk" firstAttribute="top" secondItem="Jdo-tr-R75" secondAttribute="bottom" id="NIP-MU-MqZ"/>
-                            <constraint firstItem="u8e-d4-gFk" firstAttribute="leading" secondItem="4uG-6P-cqe" secondAttribute="leading" id="OAA-Vm-6Hz"/>
-                            <constraint firstAttribute="trailing" secondItem="u8e-d4-gFk" secondAttribute="trailing" id="c0L-2O-thk"/>
                             <constraint firstAttribute="centerY" secondItem="Krv-d8-xXc" secondAttribute="centerY" id="cwm-CX-SLJ"/>
                             <constraint firstAttribute="centerX" secondItem="Krv-d8-xXc" secondAttribute="centerX" id="e2F-G2-xxm"/>
-                            <constraint firstItem="wxM-yh-Jci" firstAttribute="top" secondItem="u8e-d4-gFk" secondAttribute="bottom" id="l2n-pQ-AZQ"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="NIP-MU-MqZ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="authorizationWarningLabel" destination="eNG-L0-TKh" id="mzt-ks-yiC"/>
-                        <outlet property="blurEffectView" destination="u8e-d4-gFk" id="vDS-TP-YpQ"/>
-                        <outlet property="blurViewMessageLabel" destination="Pte-EC-Ulh" id="WSx-nq-ot3"/>
                         <outlet property="caloriesLabel" destination="OhZ-pl-UWy" id="hAA-nb-uD4"/>
                         <outlet property="distanceLabel" destination="zap-9x-mGX" id="YEc-WB-c4m"/>
+                        <outlet property="messageLabel" destination="eNG-L0-TKh" id="hk8-8p-aSi"/>
                         <outlet property="stepsLabel" destination="Qxa-u2-Kej" id="ubL-F8-Oze"/>
                     </connections>
                 </viewController>

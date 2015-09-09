@@ -12,26 +12,54 @@ import UIKit
 class FitnessReportViewController: UIViewController {
 
     // MARK: - Connections
+    
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var authorizationWarningLabel: UILabel!
-    @IBOutlet weak var blurEffectView: UIVisualEffectView!
-    @IBOutlet weak var blurViewMessageLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    
+    // stored data
+    var lastTotalSteps = 0 {
+        didSet {
+            HealthHelper.lastTotalSteps = lastTotalSteps
+            stepsLabel.text = "\(HealthHelper.lastTotalSteps)"
+        }
+    }
+    var lastTotalDistance: Double = 0 {
+        didSet {
+            HealthHelper.lastTotalDistance = lastTotalDistance
+            distanceLabel.text = "\(HealthHelper.lastTotalDistance)km"
+        }
+    }
+    var lastTotalActiveCalories: Double = 0 {
+        didSet {
+            HealthHelper.lastTotalActiveCalories = lastTotalActiveCalories
+            caloriesLabel.text = "\(HealthHelper.lastTotalActiveCalories)kcal"
+        }
+    }
+    
+    
+    // MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // get healthKit data
-        let begginingOfDay = NSDate().beginningOfDay()
+        // initial text labels
+        stepsLabel.text = "\(HealthHelper.lastTotalSteps)"
+        distanceLabel.text = "\(HealthHelper.lastTotalDistance)km"
+        caloriesLabel.text = "\(HealthHelper.lastTotalActiveCalories)kcal"
+        
         
         if (HealthHelper.healthKitIsAuthorized) {
             
-            // set blur view message label
-            blurViewMessageLabel.text = "Loading HealthKit data..."
+            // message label
+            messageLabel.text = "Loading data..."
+            
+            // get healthKit data
+            let begginingOfDay = NSDate().beginningOfDay()
             
             // queries
-            
             HealthHelper.getTotalStepsSinceDate(begginingOfDay) {
                 (totalSteps, error) in
                 
@@ -40,8 +68,11 @@ class FitnessReportViewController: UIViewController {
                 }
                 
                 if let totalSteps = totalSteps {
-                    self.stepsLabel.text = String(totalSteps)
+                    self.lastTotalSteps = totalSteps
                 }
+                
+                // hide message label
+                self.messageLabel.alpha = 0
                 
             }
             
@@ -53,7 +84,10 @@ class FitnessReportViewController: UIViewController {
                 }
                 
                 if let totalDistance = totalDistance {
-                    self.distanceLabel.text = String(totalDistance/1000) + "km"
+                    // total distance in meters
+                    let distanceInMeters = Double(totalDistance) / 1000
+                    let roundedDistance = round(distanceInMeters * 10) / 10
+                    self.lastTotalDistance = roundedDistance
                 }
                 
             }
@@ -66,43 +100,14 @@ class FitnessReportViewController: UIViewController {
                 }
                 
                 if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
-                    self.caloriesLabel.text = String(totalActiveCaloriesBurned) + "kcal"
-                    self.fadeOutBlurView()
-                } else {
-                    self.fadeOutBlurView()
+                    let kilocalories = Double(totalActiveCaloriesBurned) / 1000
+                    let roundedKiloCalories = round(kilocalories * 10) / 10
+                    self.lastTotalActiveCalories = roundedKiloCalories
                 }
                 
             }
             
-            // hide warning
-            authorizationWarningLabel.alpha = 0
-            
-            
-        } else {
-            
-            // set blur view message label
-            blurViewMessageLabel.text = "HealthKit data unavailable"
-            
-            // set label default
-            stepsLabel.text = "0"
-            distanceLabel.text = "0" + "km"
-            caloriesLabel.text = "0" + "kcal"
-            
-            // show warning
-            authorizationWarningLabel.alpha = 1
-            
         }
-        
-    }
-    
-    func fadeOutBlurView() {
-        
-        UIView.animateWithDuration(1, animations: {
-            self.blurEffectView.alpha = 0
-            }, completion: {
-                (success) in
-                self.blurEffectView.removeFromSuperview()
-        })
         
     }
     

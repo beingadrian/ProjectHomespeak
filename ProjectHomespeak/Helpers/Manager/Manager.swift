@@ -34,6 +34,35 @@ class Manager {
     }()
     
     
+    // MARK: - Full report 
+    
+    static func getFullReportData() {
+        
+        if (activeIntegrationDict[0]!) {
+            
+            if (HealthHelper.healthKitIsAuthorized) {
+                
+                HealthHelper.getHealthDataSet()
+                
+            }
+            
+        }
+        
+    }
+    
+    static func speakFullReport() {
+        
+        SpeechHelper.speakText("Greetings mate.")
+        
+        if (activeIntegrationDict[0]!) {
+            SpeechHelper.speakHealthKitData()
+        } else {
+            SpeechHelper.speakText("HealthKit integration inactive.")
+        }
+        
+    }
+    
+    
     // MARK: - Integration toggle
     
     static func toggleIntegrationWithIndex(index: Int, button: UIButton) {

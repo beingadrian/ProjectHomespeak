@@ -7,18 +7,41 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func showReportView(sender: UIButton) {
+        
+        performSegueWithIdentifier("ReportView", sender: self)
+        
+    }
+    
+    // unwind to segue for report view controller
+    @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
+    
+        
+        
     }
     
 }
@@ -46,6 +69,9 @@ extension MainViewController: UITableViewDataSource {
         
         // set labels
         cell.integrationLabel.text = Manager.integrations[indexPath.row]
+        
+        // set selection style
+        cell.selectionStyle = .None
         
         // set index
         cell.index = indexPath.row

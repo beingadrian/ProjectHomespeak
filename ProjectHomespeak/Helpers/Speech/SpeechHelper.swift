@@ -13,27 +13,24 @@ class SpeechHelper {
     
     // declare synthesizer
     static let synthesizer = AVSpeechSynthesizer()
+
     
-    static func speakHealthKitDataWithVariables(steps: Int, distance: Int, calories: Int) {
+    // MARK: - Speech functions
+    
+    static func speakText(string: String) {
         
-        let string = "Greetings, Adrian. Today you walked \(steps) steps. That's a total of \(distance) kilometers. You also burned \(calories). Awesome job."
+        let textToSpeak = string
         
-        let utterance = AVSpeechUtterance(string: string)
+        let utterance = AVSpeechUtterance(string: textToSpeak)
         utterance.rate = AVSpeechUtteranceMinimumSpeechRate
         
         synthesizer.speakUtterance(utterance)
         
     }
     
-    static func speakFullReport() {
-    
-    
-    
-    }
-    
-    static func speakHealthKitDataSample() {
+    static func speakHealthKitData() {
         
-        let string = "Greetings, Adrian. Today you walked 1000 steps. That's a total of 2 kilometers. You also burned 10 kilocalories. Awesome job."
+        let string = "Today you walked \(HealthHelper.lastTotalSteps) steps. That's a total of \(HealthHelper.lastTotalDistance) kilometers. You also burned \(HealthHelper.lastTotalActiveCalories) kilocalories. Awesome job mate."
         
         let utterance = AVSpeechUtterance(string: string)
         utterance.rate = AVSpeechUtteranceMinimumSpeechRate

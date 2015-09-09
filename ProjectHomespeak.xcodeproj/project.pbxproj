@@ -21,6 +21,7 @@
 		33DD60F11B9D5722002F9701 /* FitnessReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */; };
 		33DD60F81B9D9C00002F9701 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60F71B9D9C00002F9701 /* Extensions.swift */; };
 		33DD60FD1B9ECC1C002F9701 /* SpeechHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60FC1B9ECC1C002F9701 /* SpeechHelper.swift */; };
+		33DD60FF1B9FE6D8002F9701 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60FE1B9FE6D8002F9701 /* ReportViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessReportViewController.swift; sourceTree = "<group>"; };
 		33DD60F71B9D9C00002F9701 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		33DD60FC1B9ECC1C002F9701 /* SpeechHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechHelper.swift; sourceTree = "<group>"; };
+		33DD60FE1B9FE6D8002F9701 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				33DD60D41B9BDF21002F9701 /* MainViewController.swift */,
 				33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */,
+				33DD60FE1B9FE6D8002F9701 /* ReportViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				33DD60E91B9D5295002F9701 /* UIImage+ImageEffects.m in Sources */,
 				33DD60D31B9B8708002F9701 /* HealthHelper.swift in Sources */,
 				33DD60D51B9BDF21002F9701 /* MainViewController.swift in Sources */,
+				33DD60FF1B9FE6D8002F9701 /* ReportViewController.swift in Sources */,
 				33DD60DB1B9C299B002F9701 /* Manager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
