@@ -14,14 +14,28 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
         
+
 
     }
     
     override func viewDidAppear(animated: Bool) {
         
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        
+        HealthHelper.requestHealthKitAuthorization() {
+            (success, error) in
+            
+            if (error != nil) {
+                println(error?.description)
+            }
+            
+            if (success) {
+                println("HealthKit authorization successful.")
+            } else {
+                println("HealthKit authorization not successful.")
+            }
+        }
         
     }
 

@@ -28,7 +28,15 @@ class ReportViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        Manager.speakFullReport()
+        // get data
+        Manager.getFullReportData() {
+            (errors) in
+            
+            SpeechHelper.speakFullReport()
+        }
+        
+
+        
         
     }
 

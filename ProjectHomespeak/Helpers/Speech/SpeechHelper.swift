@@ -17,12 +17,37 @@ class SpeechHelper {
     
     // MARK: - Speech functions
     
+    static func speakFullReport() {
+        
+        SpeechHelper.speakText("Greetings mate.")
+        
+        // count for active integration
+        var activeIntegrationsCount = 0
+        
+        for (integrationIndex, isActive) in Manager.activeIntegrationDict {
+            if isActive {
+                activeIntegrationsCount++
+            }
+        }
+        
+        if (activeIntegrationsCount == 0) {
+            SpeechHelper.speakText("No integrations activated.")
+        }
+        
+        // if some integrations active
+        if (Manager.activeIntegrationDict[0]!) {
+            SpeechHelper.speakHealthKitData()
+        }
+        
+    }
+    
     static func speakText(string: String) {
         
         let textToSpeak = string
         
         let utterance = AVSpeechUtterance(string: textToSpeak)
         utterance.rate = AVSpeechUtteranceMinimumSpeechRate
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
         
         synthesizer.speakUtterance(utterance)
         
@@ -30,10 +55,11 @@ class SpeechHelper {
     
     static func speakHealthKitData() {
         
-        let string = "Today you walked \(HealthHelper.lastTotalSteps) steps. That's a total of \(HealthHelper.lastTotalDistance) kilometers. You also burned \(HealthHelper.lastTotalActiveCalories) kilocalories. Awesome job mate."
+        let string = "Today you walked \(HealthHelper.lastTotalSteps) steps. That's a total of \(HealthHelper.lastTotalDistance) kilometers. You also burned \(HealthHelper.lastTotalActiveCalories) kilo-calories. Awesome job mate."
         
         let utterance = AVSpeechUtterance(string: string)
         utterance.rate = AVSpeechUtteranceMinimumSpeechRate
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
         
         synthesizer.speakUtterance(utterance)
         

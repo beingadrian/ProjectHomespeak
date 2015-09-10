@@ -70,52 +70,65 @@ class HealthHelper {
     // MARK: - Health quries
     
     // get all data set
-    static func getHealthDataSet() {
+    static func getHealthDataSet(completionBlock: (errors: [String: NSError?]) -> Void) {
         
-        // get healthKit data
-        let begginingOfDay = NSDate().beginningOfDay()
-        
-        HealthHelper.getTotalStepsSinceDate(begginingOfDay) {
-            (totalSteps, error) in
+        if (HealthHelper.healthKitIsAuthorized) {
             
-            if (error != nil) {
-                println(error?.description)
+            // errors
+            var errors: [String: NSError?] = [:]
+            
+            // get healthKit data
+            let begginingOfDay = NSDate().beginningOfDay()
+            
+            HealthHelper.getTotalStepsSinceDate(begginingOfDay) {
+                (totalSteps, error) in
+                
+                if let error = error {
+                    println(error.description)
+                    errors["steps"] = error
+                }
+                
+                if let totalSteps = totalSteps {
+                    self.lastTotalSteps = totalSteps
+                }
+                
             }
             
-            if let totalSteps = totalSteps {
-                self.lastTotalSteps = totalSteps
+            HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
+                (totalDistance, error) in
+                
+                if let error = error {
+                    println(error.description)
+                    errors["distance"] = error
+                }
+                
+                if let totalDistance = totalDistance {
+                    // convert from meters to kilometers
+                    let distanceInMeters = Double(totalDistance) / 1000
+                    let roundedDistance = round(distanceInMeters * 10) / 10
+                    self.lastTotalDistance = roundedDistance
+                }
+                
             }
             
-        }
-        
-        HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
-            (totalDistance, error) in
-            
-            if (error != nil) {
-                println(error?.description)
+            HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
+                (totalActiveCaloriesBurned, error) in
+                
+                if let error = error {
+                    println(error.description)
+                    errors["calories"] = error
+                }
+                
+                if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
+                    // convert calories to kilocalories
+                    let kilocalories = Double(totalActiveCaloriesBurned) / 1000
+                    let roundedKiloCalories = round(kilocalories * 10) / 10
+                    self.lastTotalActiveCalories = roundedKiloCalories
+                }
+                
             }
             
-            if let totalDistance = totalDistance {
-                // total distance in meters
-                let distanceInMeters = Double(totalDistance) / 1000
-                let roundedDistance = round(distanceInMeters * 10) / 10
-                self.lastTotalDistance = roundedDistance
-            }
-            
-        }
-        
-        HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
-            (totalActiveCaloriesBurned, error) in
-            
-            if (error != nil) {
-                println(error?.description)
-            }
-            
-            if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
-                let kilocalories = Double(totalActiveCaloriesBurned) / 1000
-                let roundedKiloCalories = round(kilocalories * 10) / 10
-                self.lastTotalActiveCalories = roundedKiloCalories
-            }
+            completionBlock(errors: errors)
             
         }
         

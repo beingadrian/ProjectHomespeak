@@ -34,32 +34,35 @@ class Manager {
     }()
     
     
-    // MARK: - Full report 
+    // TODO: - Full report
     
-    static func getFullReportData() {
+    static func getFullReportData(completionBlock: (errors: [Int: Bool]) -> Void) {
         
+        // errors
+        var reportErrors: [Int: Bool] = [
+            0: false,
+            1: false,
+            2: false,
+            3: false
+        ]
+        
+        // get health kit data
         if (activeIntegrationDict[0]!) {
             
-            if (HealthHelper.healthKitIsAuthorized) {
+            HealthHelper.getHealthDataSet() {
+                (errors) in
                 
-                HealthHelper.getHealthDataSet()
+                if (errors.count != 0) {
+                    reportErrors[0] = true
+                    println(errors)
+                }
                 
             }
             
         }
         
-    }
-    
-    static func speakFullReport() {
-        
-        SpeechHelper.speakText("Greetings mate.")
-        
-        if (activeIntegrationDict[0]!) {
-            SpeechHelper.speakHealthKitData()
-        } else {
-            SpeechHelper.speakText("HealthKit integration inactive.")
-        }
-        
+        completionBlock(errors: reportErrors)
+
     }
     
     
@@ -91,22 +94,8 @@ class Manager {
                 switch (index) {
                 case 0:
                     // Fitness report
-                    HealthHelper.requestHealthKitAuthorization() {
-                        (success, error) in
-                        
-                        if (error != nil) {
-                            println(error?.description)
-                        }
-                        
-                        if (success) {
-                            println("HealthKit authorization successful.")
-                        } else {
-                            println("HealthKit authorization not successful.")
-                            self.activeIntegrationDict[index] = false
-                            button.selected = false
-                        }
-                    }
-                    
+                    println("\(index) is active")
+                    // TODO: if healthkit not authorized disable toggle
                 case 1:
                     // Auto-music
                     println("\(index) is active")
