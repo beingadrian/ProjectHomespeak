@@ -21,8 +21,6 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
-        
         HealthHelper.requestHealthKitAuthorization() {
             (success, error) in
             
@@ -38,6 +36,12 @@ class MainViewController: UIViewController {
         }
         
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+        return UIStatusBarStyle.LightContent
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,13 +52,6 @@ class MainViewController: UIViewController {
     @IBAction func showReportView(sender: UIButton) {
         
         performSegueWithIdentifier("ReportView", sender: self)
-        
-    }
-    
-    // unwind to segue for report view controller
-    @IBAction func unwindToSegue(segue: UIStoryboardSegue) {
-    
-        
         
     }
     

@@ -6,4 +6,3 @@
 //  Copyright (c) 2015 BeingAdrian. All rights reserved.
 //
 
-#import "UIImage+ImageEffects.h"

@@ -1,0 +1,10 @@
+PODS:
+  - CCMRadarView (1.0.0)
+
+DEPENDENCIES:
+  - CCMRadarView
+
+SPEC CHECKSUMS:
+  CCMRadarView: 29df2ff76cb5fdb2d4ebd522d7efbfd1f6a0f22f
+
+COCOAPODS: 0.38.2
