@@ -23,7 +23,12 @@ class HealthHelper {
     }()
     
     // authorized
-    static var healthKitIsAuthorized = false
+    static var healthKitIsAuthorized = Manager.defaults.boolForKey("healthKitIsAuthorized") ?? false {
+        didSet {
+            Manager.defaults.setValue(healthKitIsAuthorized, forKey: "healthKitIsAuthorized")
+        }
+    }
+
     
     // stored data
     static var lastTotalSteps: Int = 0
@@ -92,43 +97,43 @@ class HealthHelper {
                     self.lastTotalSteps = totalSteps
                 }
                 
+                HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
+                    (totalDistance, error) in
+                    
+                    if let error = error {
+                        println(error.description)
+                        errors["distance"] = error
+                    }
+                    
+                    if let totalDistance = totalDistance {
+                        // convert from meters to kilometers
+                        let distanceInMeters = Double(totalDistance) / 1000
+                        let roundedDistance = round(distanceInMeters * 10) / 10
+                        self.lastTotalDistance = roundedDistance
+                    }
+                    
+                    HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
+                        (totalActiveCaloriesBurned, error) in
+                        
+                        if let error = error {
+                            println(error.description)
+                            errors["calories"] = error
+                        }
+                        
+                        if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
+                            // convert calories to kilocalories
+                            let kilocalories = Double(totalActiveCaloriesBurned) / 1000
+                            let roundedKiloCalories = round(kilocalories * 10) / 10
+                            self.lastTotalActiveCalories = roundedKiloCalories
+                        }
+                        
+                        completionBlock(errors: errors)
+                        
+                    }
+                    
+                }
+                
             }
-            
-            HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
-                (totalDistance, error) in
-                
-                if let error = error {
-                    println(error.description)
-                    errors["distance"] = error
-                }
-                
-                if let totalDistance = totalDistance {
-                    // convert from meters to kilometers
-                    let distanceInMeters = Double(totalDistance) / 1000
-                    let roundedDistance = round(distanceInMeters * 10) / 10
-                    self.lastTotalDistance = roundedDistance
-                }
-                
-            }
-            
-            HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
-                (totalActiveCaloriesBurned, error) in
-                
-                if let error = error {
-                    println(error.description)
-                    errors["calories"] = error
-                }
-                
-                if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
-                    // convert calories to kilocalories
-                    let kilocalories = Double(totalActiveCaloriesBurned) / 1000
-                    let roundedKiloCalories = round(kilocalories * 10) / 10
-                    self.lastTotalActiveCalories = roundedKiloCalories
-                }
-                
-            }
-            
-            completionBlock(errors: errors)
             
         }
         

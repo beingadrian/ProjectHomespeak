@@ -12,9 +12,16 @@ import UIKit
 
 class Manager {
     
+    // NSUserDefaults
+    static let defaults = NSUserDefaults.standardUserDefaults()
+    
     // integrations
     static let integrations = ["Fitness report", "Auto-music", "Stocks report", "Planner"]
-    static var activeIntegrationDict: [Int: Bool] = [0: false, 1: false, 2: false, 3: false]
+    static var activeIntegrationsArray: [Bool] = defaults.arrayForKey("activeIntegrationsArray") as? [Bool] ?? [false, false, false, false] {
+        didSet {
+            defaults.setValue(activeIntegrationsArray, forKey: "activeIntegrationsArray")
+        }
+    }
     
     // integration cell properties
     static let integrationRowHeight: CGFloat = 110
@@ -47,7 +54,7 @@ class Manager {
         ]
         
         // get health kit data
-        if (activeIntegrationDict[0]!) {
+        if (activeIntegrationsArray[0]) {
             
             HealthHelper.getHealthDataSet() {
                 (errors) in
@@ -72,13 +79,13 @@ class Manager {
         
         if (button.selected == true) {
             // toggle off
-            activeIntegrationDict[index] = false
+            activeIntegrationsArray[index] = false
             checkActiveIntegrationsWithButton(button)
             button.selected = false
         } else {
             // toggle on
             button.selected = true
-            activeIntegrationDict[index] = true
+            activeIntegrationsArray[index] = true
             checkActiveIntegrationsWithButton(button)
         }
         
@@ -87,27 +94,11 @@ class Manager {
     // run active integrations
     static func checkActiveIntegrationsWithButton(button: UIButton) {
         
-        for (index, isActive) in activeIntegrationDict {
+        for index in 0...3 {
             
-            if (isActive) {
+            if activeIntegrationsArray[index] {
                 
-                switch (index) {
-                case 0:
-                    // Fitness report
-                    println("\(index) is active")
-                    // TODO: if healthkit not authorized disable toggle
-                case 1:
-                    // Auto-music
-                    println("\(index) is active")
-                case 2:
-                    // Stock report
-                    println("\(index) is active")
-                case 3:
-                    // Planner
-                    println("\(index) is active")
-                default:
-                    break
-                }
+                println("\(index) is active")
                 
             }
             

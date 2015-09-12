@@ -26,13 +26,7 @@ class ReportViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        // get data
-        Manager.getFullReportData() {
-            (errors) in
-            
-            SpeechHelper.speakFullReport()
-    
-        }
+        SpeechHelper.speakFullReport()
         
         // animated circle
         let animatedCircleA = CircleAnimationA(duration: 1, lineWidth: 4)
@@ -52,6 +46,7 @@ class ReportViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -65,14 +60,12 @@ class ReportViewController: UIViewController {
     
     @IBAction func returnButtonPressed(sender: AnyObject) {
         
-        // TODO: stop speech if necessary
+        // stop speech
         SpeechHelper.synthesizer.stopSpeakingAtBoundary(.Immediate)
         
         dismissViewControllerAnimated(true, completion: nil)
     
     }
-    
-    
     
 
 }

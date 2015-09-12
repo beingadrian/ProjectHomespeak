@@ -71,38 +71,38 @@ class FitnessReportViewController: UIViewController {
                     self.lastTotalSteps = totalSteps
                 }
                 
-                // hide message label
-                self.messageLabel.alpha = 0
-                
-            }
-            
-            HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
-                (totalDistance, error) in
-                
-                if (error != nil) {
-                    println(error?.description)
-                }
-                
-                if let totalDistance = totalDistance {
-                    // total distance in meters
-                    let distanceInMeters = Double(totalDistance) / 1000
-                    let roundedDistance = round(distanceInMeters * 10) / 10
-                    self.lastTotalDistance = roundedDistance
-                }
-                
-            }
-            
-            HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
-                (totalActiveCaloriesBurned, error) in
-                
-                if (error != nil) {
-                    println(error?.description)
-                }
-                
-                if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
-                    let kilocalories = Double(totalActiveCaloriesBurned) / 1000
-                    let roundedKiloCalories = round(kilocalories * 10) / 10
-                    self.lastTotalActiveCalories = roundedKiloCalories
+                HealthHelper.getTotalDistanceSinceDate(begginingOfDay) {
+                    (totalDistance, error) in
+                    
+                    if (error != nil) {
+                        println(error?.description)
+                    }
+                    
+                    if let totalDistance = totalDistance {
+                        // total distance in meters
+                        let distanceInMeters = Double(totalDistance) / 1000
+                        let roundedDistance = round(distanceInMeters * 10) / 10
+                        self.lastTotalDistance = roundedDistance
+                    }
+                    
+                    HealthHelper.getTotalActiveCaloriesBurnedSinceDate(begginingOfDay) {
+                        (totalActiveCaloriesBurned, error) in
+                        
+                        if (error != nil) {
+                            println(error?.description)
+                        }
+                        
+                        if let totalActiveCaloriesBurned = totalActiveCaloriesBurned {
+                            let kilocalories = Double(totalActiveCaloriesBurned) / 1000
+                            let roundedKiloCalories = round(kilocalories * 10) / 10
+                            self.lastTotalActiveCalories = roundedKiloCalories
+                        }
+                        
+                        // hide message label
+                        self.messageLabel.alpha = 0
+                        
+                    }
+                    
                 }
                 
             }

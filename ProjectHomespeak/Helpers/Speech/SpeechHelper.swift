@@ -24,8 +24,8 @@ class SpeechHelper {
         // count for active integration
         var activeIntegrationsCount = 0
         
-        for (integrationIndex, isActive) in Manager.activeIntegrationDict {
-            if isActive {
+        for index in 0...3 {
+            if Manager.activeIntegrationsArray[index] {
                 activeIntegrationsCount++
             }
         }
@@ -35,7 +35,7 @@ class SpeechHelper {
         }
         
         // if some integrations active
-        if (Manager.activeIntegrationDict[0]!) {
+        if (Manager.activeIntegrationsArray[0]) {
             SpeechHelper.speakHealthKitData()
         }
         

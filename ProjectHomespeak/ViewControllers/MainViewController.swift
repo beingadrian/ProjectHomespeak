@@ -12,10 +12,37 @@ import AVFoundation
 
 class MainViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    @IBOutlet weak var dataActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var reportButton: UIButton!
+    
+    
+    // MARK: - 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        // get data
+        Manager.getFullReportData() {
+            (errors) in
+            
+            // TODO: error handling
+            for (index, hasError) in errors {
+                if (hasError) {
+                    println("\(index) has error.")
+                }
+            }
+            
+            // animate alpha switch when data loaded
+            UIView.animateWithDuration(1) {
+                
+                self.dataActivityIndicator.stopAnimating()
+                self.reportButton.alpha = 1
+                
+            }
+            
+        }
 
     }
     
@@ -77,6 +104,11 @@ extension MainViewController: UITableViewDataSource {
         
         let buttonImageNameSelected = Manager.integrationImagesSelected[indexPath.row]
         cell.integrationToggleButton.setImage(UIImage(named: buttonImageNameSelected), forState: .Selected)
+        
+        // button toggle
+        if Manager.activeIntegrationsArray[indexPath.row] {
+            cell.integrationToggleButton.selected = true
+        }
         
         // set labels
         cell.integrationLabel.text = Manager.integrations[indexPath.row]

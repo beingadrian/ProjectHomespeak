@@ -100,7 +100,10 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="n70-jD-vfL"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sa-Ns-xww">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="eLB-vD-kWP" userLabel="Data Activity Monitor">
+                                        <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sa-Ns-xww">
                                         <rect key="frame" x="64.5" y="490" width="131" height="30"/>
                                         <state key="normal" title="Give today's report">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,6 +120,8 @@
                                     <constraint firstAttribute="bottom" secondItem="6Sa-Ns-xww" secondAttribute="bottom" id="2ZN-nL-Erz"/>
                                     <constraint firstAttribute="height" constant="520" id="5Fa-b3-O8U"/>
                                     <constraint firstAttribute="centerX" secondItem="Ytb-rn-7SR" secondAttribute="centerX" id="80l-Jm-jhm"/>
+                                    <constraint firstItem="eLB-vD-kWP" firstAttribute="centerY" secondItem="6Sa-Ns-xww" secondAttribute="centerY" id="9Ci-ec-rd6"/>
+                                    <constraint firstAttribute="centerX" secondItem="eLB-vD-kWP" secondAttribute="centerX" id="EHW-Y9-T2a"/>
                                     <constraint firstItem="Ytb-rn-7SR" firstAttribute="top" secondItem="85w-Iw-31W" secondAttribute="top" constant="10" id="FVG-Ht-0tN"/>
                                     <constraint firstItem="btg-69-Dfd" firstAttribute="top" secondItem="85w-Iw-31W" secondAttribute="top" constant="40" id="IOB-qc-ICK"/>
                                     <constraint firstAttribute="width" constant="260" id="Iyx-wN-1Wj"/>
@@ -127,9 +132,23 @@
                                     <constraint firstAttribute="trailing" secondItem="btg-69-Dfd" secondAttribute="trailing" id="tSt-zL-KH7"/>
                                 </constraints>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="eLB-vD-kWP"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="IOB-qc-ICK"/>
                                         <exclude reference="MLh-N6-hUa"/>
+                                        <exclude reference="9Ci-ec-rd6"/>
+                                        <exclude reference="EHW-Y9-T2a"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="eLB-vD-kWP"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="9Ci-ec-rd6"/>
+                                        <include reference="EHW-Y9-T2a"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -143,6 +162,8 @@
                     <navigationItem key="navigationItem" id="gmr-Vk-uVD" userLabel="Dashboard"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="dataActivityIndicator" destination="eLB-vD-kWP" id="GeR-wY-zsN"/>
+                        <outlet property="reportButton" destination="6Sa-Ns-xww" id="KG9-Z5-WES"/>
                         <segue destination="wjt-DN-cNR" kind="show" identifier="FitnessReport" id="fe1-It-VdQ"/>
                         <segue destination="nUS-uF-XG8" kind="show" identifier="AutoMusic" id="5f3-zw-wqC"/>
                         <segue destination="WKh-60-ayl" kind="presentation" identifier="ReportView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="muf-KA-eIo"/>
