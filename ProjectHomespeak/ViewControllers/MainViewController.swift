@@ -23,24 +23,42 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // get data
-        Manager.getFullReportData() {
-            (errors) in
+        // permission for notifications
+        let notificationSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        
+        // set status bar style
+        navigationController?.navigationBar.barStyle = .Black
+        
+        if (Manager.userIsSetup) {
             
-            // TODO: error handling
-            for (index, hasError) in errors {
-                if (hasError) {
-                    println("\(index) has error.")
+            // get report data
+            Manager.getFullReportData() {
+                (errors) in
+                
+                // TODO: error handling
+                for (index, hasError) in errors {
+                    if (hasError) {
+                        println("\(index) has error.")
+                    }
                 }
+                
+                // animate alpha switch when data loaded
+                UIView.animateWithDuration(1) {
+                    
+                    self.dataActivityIndicator.stopAnimating()
+                    self.reportButton.alpha = 1
+                    
+                }
+                
             }
             
-            // animate alpha switch when data loaded
-            UIView.animateWithDuration(1) {
-                
-                self.dataActivityIndicator.stopAnimating()
-                self.reportButton.alpha = 1
-                
-            }
+        } else {
+            
+            dataActivityIndicator.stopAnimating()
+            reportButton.setTitle("Setup Homespeak", forState: .Normal)
+            reportButton.alpha = 1
+
             
         }
 
@@ -63,12 +81,6 @@ class MainViewController: UIViewController {
         }
         
     }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        
-        return UIStatusBarStyle.LightContent
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -78,7 +90,19 @@ class MainViewController: UIViewController {
     
     @IBAction func showReportView(sender: UIButton) {
         
-        performSegueWithIdentifier("ReportView", sender: self)
+        if Manager.userIsSetup {
+            
+            // report VC
+            performSegueWithIdentifier("ReportView", sender: self)
+            
+        } else {
+            
+            // setup VC
+            performSegueWithIdentifier("SetupView", sender: self)
+            
+        }
+        
+        
         
     }
     

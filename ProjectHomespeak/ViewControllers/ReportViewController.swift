@@ -21,6 +21,9 @@ class ReportViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set status bar style
+        navigationController?.navigationBar.barStyle = .Default
     
     }
     
@@ -49,12 +52,6 @@ class ReportViewController: UIViewController {
         
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        
-        return UIStatusBarStyle.Default
-        
-    }
-
     
     // MARK: - Actions
     

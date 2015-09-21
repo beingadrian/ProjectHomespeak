@@ -11,7 +11,7 @@ import UIKit
 
 class FitnessReportViewController: UIViewController {
 
-    // MARK: - Connections
+    // MARK: - Properties
     
     @IBOutlet weak var stepsLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -45,6 +45,9 @@ class FitnessReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set status bar style
+        navigationController?.navigationBar.barStyle = .Black
+        
         // initial text labels
         stepsLabel.text = "\(HealthHelper.lastTotalSteps)"
         distanceLabel.text = "\(HealthHelper.lastTotalDistance)km"
@@ -59,7 +62,7 @@ class FitnessReportViewController: UIViewController {
             // get healthKit data
             let begginingOfDay = NSDate().beginningOfDay()
             
-            // queries
+            // TODO: optomize code on queries
             HealthHelper.getTotalStepsSinceDate(begginingOfDay) {
                 (totalSteps, error) in
                 
@@ -106,6 +109,11 @@ class FitnessReportViewController: UIViewController {
                 }
                 
             }
+            
+        } else {
+            
+            // HealthKit authorization failed
+            messageLabel.text = "HealthKit not authorized"
             
         }
         

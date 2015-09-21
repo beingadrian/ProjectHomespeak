@@ -55,13 +55,19 @@ class SpeechHelper {
     
     static func speakHealthKitData() {
         
-        let string = "Today you walked \(HealthHelper.lastTotalSteps) steps. That's a total of \(HealthHelper.lastTotalDistance) kilometers. You also burned \(HealthHelper.lastTotalActiveCalories) kilo-calories. Awesome job mate."
+        if (HealthHelper.healthKitIsAuthorized) {
+            let string = "Today you have walked \(HealthHelper.lastTotalSteps) steps. That's a total of \(HealthHelper.lastTotalDistance) kilometers. You have also burned \(HealthHelper.lastTotalActiveCalories) kilo-calories. Awesome job mate."
+            
+            let utterance = AVSpeechUtterance(string: string)
+            utterance.rate = AVSpeechUtteranceMinimumSpeechRate
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
+            
+            synthesizer.speakUtterance(utterance)
+        } else {
+            speakText("HealthKit is not authorized.")
+        }
         
-        let utterance = AVSpeechUtterance(string: string)
-        utterance.rate = AVSpeechUtteranceMinimumSpeechRate
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
-        
-        synthesizer.speakUtterance(utterance)
+
         
     }
     

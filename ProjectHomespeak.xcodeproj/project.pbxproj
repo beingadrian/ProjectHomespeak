@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33DA1F5D1BA4E7AD00EEC80C /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA1F5C1BA4E7AD00EEC80C /* SetupViewController.swift */; };
+		33DA1F5F1BA4EB0D00EEC80C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DA1F5E1BA4EB0D00EEC80C /* MapKit.framework */; };
+		33DA1F651BA6275800EEC80C /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DA1F641BA6275800EEC80C /* LocationHelper.swift */; };
 		33DD60AB1B9B85EC002F9701 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60AA1B9B85EC002F9701 /* AppDelegate.swift */; };
 		33DD60B21B9B85EC002F9701 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33DD60B11B9B85EC002F9701 /* Images.xcassets */; };
 		33DD60C11B9B85EC002F9701 /* ProjectHomespeakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DD60C01B9B85EC002F9701 /* ProjectHomespeakTests.swift */; };
@@ -39,6 +42,9 @@
 /* Begin PBXFileReference section */
 		023E12AB299BA753DBB3BAEC /* Pods_ProjectHomespeak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectHomespeak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AB5FD0CA22D4BF70BD3BD6 /* Pods-ProjectHomespeak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectHomespeak.release.xcconfig"; path = "Pods/Target Support Files/Pods-ProjectHomespeak/Pods-ProjectHomespeak.release.xcconfig"; sourceTree = "<group>"; };
+		33DA1F5C1BA4E7AD00EEC80C /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		33DA1F5E1BA4EB0D00EEC80C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		33DA1F641BA6275800EEC80C /* LocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		33DD60A51B9B85EC002F9701 /* ProjectHomespeak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectHomespeak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DD60AA1B9B85EC002F9701 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33DD60AF1B9B85EC002F9701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33DD60CB1B9B8603002F9701 /* HealthKit.framework in Frameworks */,
+				33DA1F5F1BA4EB0D00EEC80C /* MapKit.framework in Frameworks */,
 				714A92C318AA1ADDEA7FF7CC /* Pods_ProjectHomespeak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +92,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33DA1F601BA626D300EEC80C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		33DA1F611BA626D300EEC80C /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				33DA1F641BA6275800EEC80C /* LocationHelper.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		33DA1F621BA626D300EEC80C /* Music */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		33DA1F631BA626D300EEC80C /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stocks;
+			sourceTree = "<group>";
+		};
 		33DD609C1B9B85EC002F9701 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +180,10 @@
 		33DD60CD1B9B8681002F9701 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				33DA1F601BA626D300EEC80C /* Calendar */,
+				33DA1F611BA626D300EEC80C /* Location */,
+				33DA1F621BA626D300EEC80C /* Music */,
+				33DA1F631BA626D300EEC80C /* Stocks */,
 				33DD60FB1B9ECC02002F9701 /* Speech */,
 				33DD60D91B9C2982002F9701 /* Manager */,
 				33DD60D11B9B86F2002F9701 /* HealthKit */,
@@ -157,6 +197,7 @@
 				33DD60D41B9BDF21002F9701 /* MainViewController.swift */,
 				33DD60F01B9D5722002F9701 /* FitnessReportViewController.swift */,
 				33DD60FE1B9FE6D8002F9701 /* ReportViewController.swift */,
+				33DA1F5C1BA4E7AD00EEC80C /* SetupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +256,7 @@
 		5ECE87E0DD70C1B3301DE9B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33DA1F5E1BA4EB0D00EEC80C /* MapKit.framework */,
 				023E12AB299BA753DBB3BAEC /* Pods_ProjectHomespeak.framework */,
 			);
 			name = Frameworks;
@@ -276,6 +318,7 @@
 		33DD609D1B9B85EC002F9701 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = BeingAdrian;
 				TargetAttributes = {
@@ -284,6 +327,9 @@
 						DevelopmentTeam = E94PZ6NN69;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};
@@ -390,8 +436,10 @@
 				33DD60AB1B9B85EC002F9701 /* AppDelegate.swift in Sources */,
 				33DD60FD1B9ECC1C002F9701 /* SpeechHelper.swift in Sources */,
 				33DD60F11B9D5722002F9701 /* FitnessReportViewController.swift in Sources */,
+				33DA1F5D1BA4E7AD00EEC80C /* SetupViewController.swift in Sources */,
 				33DD60F81B9D9C00002F9701 /* Extensions.swift in Sources */,
 				33DD61041BA40A3B002F9701 /* CircleAnimationA.swift in Sources */,
+				33DA1F651BA6275800EEC80C /* LocationHelper.swift in Sources */,
 				33DD60E91B9D5295002F9701 /* UIImage+ImageEffects.m in Sources */,
 				33DD60D31B9B8708002F9701 /* HealthHelper.swift in Sources */,
 				33DD60D51B9BDF21002F9701 /* MainViewController.swift in Sources */,

@@ -15,6 +15,9 @@ class Manager {
     // NSUserDefaults
     static let defaults = NSUserDefaults.standardUserDefaults()
     
+    // geofencing setup
+    static var userIsSetup = false
+    
     // integrations
     static let integrations = ["Fitness report", "Auto-music", "Stocks report", "Planner"]
     static var activeIntegrationsArray: [Bool] = defaults.arrayForKey("activeIntegrationsArray") as? [Bool] ?? [false, false, false, false] {
@@ -41,7 +44,7 @@ class Manager {
     }()
     
     
-    // TODO: - Full report
+    // TODO: - Full report (error handling)
     
     static func getFullReportData(completionBlock: (errors: [Int: Bool]) -> Void) {
         
@@ -65,6 +68,27 @@ class Manager {
                 }
                 
             }
+            
+        }
+        
+        // auto-music
+        if (activeIntegrationsArray[1]) {
+            
+            // code
+            
+        }
+        
+        // stock report
+        if (activeIntegrationsArray[2]) {
+            
+            // code
+            
+        }
+        
+        // planner
+        if (activeIntegrationsArray[3]) {
+            
+            // code{
             
         }
         
